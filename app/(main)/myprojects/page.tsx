@@ -13,6 +13,7 @@ async function getProjects(userId: string) {
             id: true,
             name: true,
             creator: true,
+            category: true,
             description: true,
             projectLink: true,
             githubLink: true,

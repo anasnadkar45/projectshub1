@@ -5,6 +5,7 @@ import { z } from 'zod'
 import prisma from "./lib/db";
 import { revalidatePath } from "next/cache";
 import { ProjectCategoryTypes } from "@prisma/client";
+import exp from "constants";
 
 export type State = {
     status: "error" | "success" | undefined;
@@ -148,6 +149,73 @@ export async function deleteProject(prevState: any, formData: FormData) {
     }
 }
 
+export async function updateProject(prevState: any, formData: FormData) {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
+
+    if (!user) {
+        return {
+            status: "error",
+            message: "Need to login to delete your project",
+        };
+    }
+
+    const validateFields = projectSchema.safeParse({
+        name: formData.get('name'),
+        creator: formData.get('creator'),
+        category: formData.get('category'),
+        description: formData.get('description'),
+        projectLink: formData.get('projectLink'),
+        githubLink: formData.get('githubLink'),
+        image: JSON.parse(formData.get("image") as string),
+    });
+
+    const userId = user.id;
+    const projectId = formData.get('projectId') as string;
+
+    if (!validateFields.success) {
+        const state: State = {
+            status: "error",
+            errors: validateFields.error.flatten().fieldErrors,
+            message: "Oops, I think there is a mistake with your inputs.",
+        };
+
+        console.log(state);
+        return state;
+    }
+
+    try {
+        const data = await prisma.project.update({
+            where: {
+                id: projectId,
+                userId: userId,
+            },
+            data: {
+                userId: user.id,
+                name: validateFields.data.name,
+                creator: validateFields.data.creator,
+                category: validateFields.data.category as ProjectCategoryTypes,
+                description: validateFields.data.description,
+                image: validateFields.data.image,
+                githubLink: validateFields.data.githubLink,
+                projectLink: validateFields.data.projectLink,
+            }
+        })
+
+        revalidatePath('/myprojects');
+        const state: State = {
+            status: "success",
+            message: "Project has been updated successfully",
+        };
+        return state;
+    } catch (err) {
+        console.error("Error while favoriting:", err);
+        return {
+            status: "error",
+            message: "An error occurred while updating the project. Please try again later.",
+        };
+    }
+}
 export async function addToFavorites(prevState: any, formData: FormData) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();

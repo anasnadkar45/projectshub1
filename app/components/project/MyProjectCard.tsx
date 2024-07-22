@@ -18,11 +18,14 @@ import { deleteProject, State } from "@/app/actions";
 import { useFormState } from "react-dom";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import UpdateProject from "@/app/(main)/forms/UpdateProject";
+import { AddButton } from "../Common/AddButton";
 interface iProjectProps {
     project: {
         id: string
         name: string;
         creator: string;
+        category: string;
         description: string;
         image: string;
         projectLink: string;
@@ -42,13 +45,14 @@ const MyProjectCard = ({ project }: iProjectProps) => {
         }
     }, [state]);
     return (
-        <div key={project.id} className='relative border-2 rounded-lg bg-card space-y-2 p-3 hover:cursor-pointer hover:border-primary/60 animate-in duration-300 '>
-            <form action={formAction}>
-                <input type="hidden" name="projectId" value={project.id} />
-                <button type="submit" className='absolute top-7 right-5 z-10'>
-                    <Trash size={25} />
-                </button>
-            </form>
+        <div key={project.id} className='relative border-2 rounded-lg bg-card space-y-3 p-3 hover:cursor-pointer hover:border-primary/60 animate-in duration-300 '>
+            <div className="flex gap-4">
+                <form action={formAction}>
+                    <input type="hidden" name="projectId" value={project.id} />
+                    <AddButton type="submit" variant="outline"><Trash className='mr-2' /> Delete Project</AddButton>
+                </form>
+                <UpdateProject project={project}/>
+            </div>
             <Dialog>
                 <DialogTrigger asChild>
                     <div className="block relative h-[230px]">
@@ -69,7 +73,7 @@ const MyProjectCard = ({ project }: iProjectProps) => {
                         </DialogDescription> */}
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
-                        <div className="block relative h-[230px] border rounded-lg">
+                        <div className="block relative h-[250px] sm:h-[300px] md:h-[480px] border rounded-lg">
                             <Image
                                 alt="Project image"
                                 src={project.image}
