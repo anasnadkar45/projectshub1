@@ -111,6 +111,43 @@ export async function createProject(prevState: any, formData: FormData) {
     // redirect('/dashboard')
 }
 
+export async function deleteProject(prevState: any, formData: FormData) {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
+
+    if (!user) {
+        return {
+            status: "error",
+            message: "Need to login to delete your project",
+        };
+    }
+
+    const userId = user.id;
+    const projectId = formData.get('projectId') as string;
+
+    try {
+        const data = await prisma.project.delete({
+            where: {
+                id: projectId,
+                userId: userId
+            }
+        })
+
+        revalidatePath('/myprojects');
+        const state: State = {
+            status: "success",
+            message: "Project has been deleted successfully",
+        };
+        return state;
+    } catch (err) {
+        console.error("Error while favoriting:", err);
+        return {
+            status: "error",
+            message: "An error occurred while deleting the project. Please try again later.",
+        };
+    }
+}
+
 export async function addToFavorites(prevState: any, formData: FormData) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();

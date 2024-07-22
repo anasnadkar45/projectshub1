@@ -9,11 +9,15 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Globe, Heart } from 'lucide-react'
+import { ExternalLink, Globe, Heart, Trash } from 'lucide-react'
 import { AiFillGithub } from "react-icons/ai";
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { deleteProject, State } from "@/app/actions";
+import { useFormState } from "react-dom";
+import { useEffect } from "react";
+import { toast } from "sonner";
 interface iProjectProps {
     project: {
         id: string
@@ -27,8 +31,24 @@ interface iProjectProps {
 }
 
 const MyProjectCard = ({ project }: iProjectProps) => {
+    const initialState: State = { message: "", status: undefined };
+    const [state, formAction] = useFormState(deleteProject, initialState);
+
+    useEffect(() => {
+        if (state.status === "success") {
+            toast.success(state.message);
+        } else if (state.status === "error") {
+            toast.error(state.message);
+        }
+    }, [state]);
     return (
         <div key={project.id} className='relative border-2 rounded-lg bg-card space-y-2 p-3 hover:cursor-pointer hover:border-primary/60 animate-in duration-300 '>
+            <form action={formAction}>
+                <input type="hidden" name="projectId" value={project.id} />
+                <button type="submit" className='absolute top-7 right-5 z-10'>
+                    <Trash size={25} />
+                </button>
+            </form>
             <Dialog>
                 <DialogTrigger asChild>
                     <div className="block relative h-[230px]">
