@@ -16,7 +16,7 @@ export async function GET() {
     return NextResponse.redirect(
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000"
-        : "https://dev-zenith-v2.vercel.app/"
+        : "https://projectshub-two.vercel.app/"
     );
   }
 
@@ -45,7 +45,7 @@ export async function GET() {
       return NextResponse.redirect(
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000"
-          : "https://dev-zenith-v2.vercel.app/"
+          : "https://projectshub-two.vercel.app/"
       );
     }
   }
@@ -54,13 +54,13 @@ export async function GET() {
     return NextResponse.redirect(
       process.env.NODE_ENV === "development"
       ?"http://localhost:3000/dashboard"
-      : "https://dev-zenith-v2.vercel.app/"
+      : "https://projectshub-two.vercel.app/"
     );
   } else {
     return NextResponse.redirect(
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000"
-        : "https://dev-zenith-v2.vercel.app/"
+        : "https://projectshub-two.vercel.app/"
     );
   }
 }
