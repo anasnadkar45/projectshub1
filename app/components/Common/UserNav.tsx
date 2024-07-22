@@ -30,12 +30,18 @@ export function UserNav({ email, name, userImage }: iAppProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-card mt-2" align="end" forceMount>
-      <DropdownMenuLabel>
+        {/* <DropdownMenuLabel>
         <div>
             <p>{name}</p>
         </div>
-      </DropdownMenuLabel>
+      </DropdownMenuLabel> */}
         <DropdownMenuGroup>
+          <DropdownMenuItem asChild>
+            <p>{name}</p>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <p>{email}</p>
+          </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/profile" className="text-primary">Profile</Link>
           </DropdownMenuItem>

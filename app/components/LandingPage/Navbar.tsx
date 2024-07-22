@@ -21,27 +21,32 @@ const Navbar = async () => {
           <h1 className='font-bold text-xl'>ProjectsHub</h1>
         </div>
         <div className='md:flex gap-3 hidden justify-center items-center'>
-          <ModeToggle />
+          {/* <ModeToggle /> */}
           <Button variant={'outline'} size={'sm'} className='flex items-center gap-2'>
             <MessageSquareText />
             <span>Feedback</span>
-          </Button>
-          <Button variant={'outline'} size={'sm'} className='flex items-center gap-2'>
-            <Send />
-            <span>Submit</span>
           </Button>
           {!user ? (
             <Button size={"sm"} asChild>
               <LoginLink>Sign in</LoginLink>
             </Button>
           ) : (
-            <UserNav
-              email={user.email as string}
-              name={user.given_name as string}
-              userImage={
-                user.picture ?? `https://avatar.vercel.sh/${user.given_name}`
-              }
-            />
+            <div className='md:flex gap-3 hidden justify-center items-center'>
+              <Link href={'/dashboard'}>
+                <Button variant={'outline'} size={'sm'} className='flex items-center gap-2'>
+                  <Send />
+                  <span>Dashboard</span>
+                </Button>
+              </Link>
+
+              <UserNav
+                email={user.email as string}
+                name={user.given_name as string}
+                userImage={
+                  user.picture ?? `https://avatar.vercel.sh/${user.given_name}`
+                }
+              />
+            </div>
           )}
 
 

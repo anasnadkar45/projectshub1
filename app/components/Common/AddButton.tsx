@@ -13,6 +13,7 @@ export const AddButton = ({ children, ...rest }: ButtonProps) => {
   return (
     <Button
       {...rest}
+      size={'sm'}
       className={cn(
         'border-[0.5px] duration-200 rounded-sm bg-transparent',
         // light mode

@@ -109,7 +109,7 @@ const ProjectCard = ({ project }: iProjectProps) => {
                 </DialogContent>
             </Dialog>
 
-            <div className='flex justify-between items-center'>
+            <div className='flex flex-wrap gap-2 justify-between items-center'>
                 <h1 className='text-2xl font-bold'>{project.name}</h1>
                 <div className='flex items-center gap-2'>
                     <Link href={project.projectLink} target="_blank">

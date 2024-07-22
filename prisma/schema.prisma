@@ -25,17 +25,18 @@ model User {
 }
 
 model Project {
-  id          String     @id @default(uuid())
+  id          String               @id @default(uuid())
   name        String
   creator     String
+  category    ProjectCategoryTypes
   description String
   projectLink String
   githubLink  String
   image       String
-  createdAt   DateTime   @default(now())
-  User        User?      @relation(fields: [userId], references: [id])
+  createdAt   DateTime             @default(now())
+  User        User?                @relation(fields: [userId], references: [id])
   userId      String?
-  isFavorited Boolean    @default(false)
+  isFavorited Boolean              @default(false)
   favorites   Favorite[]
 }
 
@@ -45,4 +46,28 @@ model Favorite {
   userId    String?
   Project   Project? @relation(fields: [projectId], references: [id])
   projectId String?
+}
+
+enum ProjectCategoryTypes {
+  ECOMMERCE
+  PORTFOLIO
+  EDTECH
+  FINTECH
+  HEALTHTECH
+  SAAS
+  SOCIAL_MEDIA
+  ENTERTAINMENT
+  TRAVEL
+  REAL_ESTATE
+  PRODUCTIVITY
+  GAMING
+  IOT
+  AI_ML
+  BLOCKCHAIN
+  AGRITECH
+  HRTECH
+  FOODTECH
+  LOGISTICS
+  RENEWABLE_ENERGY
+  CYBERSECURITY
 }

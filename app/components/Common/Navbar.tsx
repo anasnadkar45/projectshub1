@@ -3,13 +3,39 @@ import React from 'react'
 import Logo from '../../../public/Logo.svg'
 import { ModeToggle } from '../Common/ToggleMode'
 import { Button } from '@/components/ui/button'
-import { Menu, MessageSquareText, Send } from 'lucide-react'
+import { EllipsisVertical, Menu, MessageSquareText, Send } from 'lucide-react'
 import Link from 'next/link'
 import { LoginLink, RegisterLink, LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { UserNav } from '../Common/UserNav'
 import NavLinks from './NavLinks'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { NavButton } from './NavButton'
 
+export const navLinks = [
+  {
+    id: 1,
+    title: 'Dashboard',
+    href: '/dashboard/all'
+  },
+  {
+    id: 2,
+    title: 'My Projects',
+    href: '/myprojects'
+  },
+  {
+    id: 3,
+    title: 'Favorite',
+    href: '/favorite'
+  },
+]
 
 const Navbar = async () => {
   const { getUser } = getKindeServerSession()
@@ -22,19 +48,21 @@ const Navbar = async () => {
             <Image src={Logo} alt='ProjectsHub Logo' width={40} height={40} />
             <h1 className='font-extrabold text-2xl'><span className='text-primary'>Projects</span>Hub</h1>
           </Link>
-          <NavLinks />
+          <div className='md:flex hidden'>
+            <NavLinks />
+          </div>
         </div>
 
         <div className='md:flex gap-3 hidden justify-center items-center'>
-          <ModeToggle />
+          {/* <ModeToggle /> */}
           <Button variant={'outline'} size={'sm'} className='flex items-center gap-2'>
             <MessageSquareText />
             <span>Feedback</span>
           </Button>
-          <Button variant={'outline'} size={'sm'} className='flex items-center gap-2'>
+          {/* <Button variant={'outline'} size={'sm'} className='flex items-center gap-2'>
             <Send />
             <span>Submit</span>
-          </Button>
+          </Button> */}
           {!user ? (
             <Button size={"sm"} asChild>
               <LoginLink>Sign in</LoginLink>
@@ -54,7 +82,20 @@ const Navbar = async () => {
         </div>
 
         <div className='md:hidden flex'>
-          <Menu />
+          <Dialog >
+            <DialogTrigger>
+              <EllipsisVertical />
+            </DialogTrigger>
+            <DialogContent className='top-32 rounded-lg'>
+              <div className='flex flex-col gap-4'>
+                {navLinks.map((navLink) => (
+                  <Link href={navLink.href} key={navLink.id} >
+                    <NavButton className='text-2xl text-muted'>{navLink.title}</NavButton>
+                  </Link>
+                ))}
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>

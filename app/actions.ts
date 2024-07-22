@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { z } from 'zod'
 import prisma from "./lib/db";
 import { revalidatePath } from "next/cache";
+import { ProjectCategoryTypes } from "@prisma/client";
 
 export type State = {
     status: "error" | "success" | undefined;
@@ -34,6 +35,9 @@ const projectSchema = z.object({
     creator: z
         .string()
         .min(3, { message: "The creatot name has to be a minimum character length of 3" }),
+    category: z
+        .string()
+        .min(1, { message: "Category is required" }),
     description: z
         .string()
         .min(10, { message: "The description has to be a minimum character length of 10" }),
@@ -59,6 +63,7 @@ export async function createProject(prevState: any, formData: FormData) {
     const validateFields = projectSchema.safeParse({
         name: formData.get('name'),
         creator: formData.get('creator'),
+        category: formData.get('category'),
         description: formData.get('description'),
         projectLink: formData.get('projectLink'),
         githubLink: formData.get('githubLink'),
@@ -81,6 +86,7 @@ export async function createProject(prevState: any, formData: FormData) {
             userId: user.id,
             name: validateFields.data.name,
             creator: validateFields.data.creator,
+            category: validateFields.data.category as ProjectCategoryTypes,
             description: validateFields.data.description,
             image: validateFields.data.image,
             githubLink: validateFields.data.githubLink,

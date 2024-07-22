@@ -7,7 +7,7 @@ const navLinks = [
     {
         id: 1,
         title: 'Dashboard',
-        href: '/dashboard'
+        href: '/dashboard/all'
     },
     {
         id: 2,
