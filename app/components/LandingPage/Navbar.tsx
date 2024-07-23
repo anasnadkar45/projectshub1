@@ -3,11 +3,15 @@ import React from 'react'
 import Logo from '../../../public/Logo.svg'
 import { ModeToggle } from '../Common/ToggleMode'
 import { Button } from '@/components/ui/button'
-import { Menu, MessageSquareText, Send } from 'lucide-react'
+import { EllipsisVertical, Menu, MessageSquareText, Send } from 'lucide-react'
 import Link from 'next/link'
 import { LoginLink, RegisterLink, LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { UserNav } from '../Common/UserNav'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { navLinks } from '../Common/Navbar'
+import { NavButton } from '../Common/NavButton'
+import { AddButton } from '../Common/AddButton'
 
 
 const Navbar = async () => {
@@ -54,7 +58,23 @@ const Navbar = async () => {
         </div>
 
         <div className='md:hidden flex'>
-          <Menu />
+          <Dialog >
+            <DialogTrigger>
+              <EllipsisVertical />
+            </DialogTrigger>
+            <DialogContent className='top-36 w-[370px] sm:w-[450px] rounded-lg'>
+              {
+                !user ? (
+                  <Button size={"sm"} asChild>
+                    <LoginLink>Sign in</LoginLink>
+                  </Button>
+                ) : (
+                  <AddButton>Dashboard</AddButton>
+                )
+              }
+
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>

@@ -86,7 +86,7 @@ const Navbar = async () => {
             <DialogTrigger>
               <EllipsisVertical />
             </DialogTrigger>
-            <DialogContent className='top-32 rounded-lg'>
+            <DialogContent className='top-32 w-[370px] sm:w-[450px] rounded-lg'>
               <div className='flex flex-col gap-4'>
                 {navLinks.map((navLink) => (
                   <Link href={navLink.href} key={navLink.id} >
