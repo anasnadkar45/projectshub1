@@ -2,6 +2,7 @@ import { AddButton } from '@/app/components/Common/AddButton';
 import MyProjectCard from '@/app/components/project/MyProjectCard';
 import prisma from '@/app/lib/db';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+import { unstable_noStore } from 'next/cache';
 import Link from 'next/link';
 import React from 'react'
 async function getProjects(userId: string) {
@@ -24,6 +25,7 @@ async function getProjects(userId: string) {
     return data;
 }
 export default async function MyProjects() {
+    unstable_noStore();
     const { getUser } = getKindeServerSession();
     const user = await getUser();
     const userId = user?.id as string;

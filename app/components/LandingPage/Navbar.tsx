@@ -36,7 +36,7 @@ const Navbar = async () => {
             </Button>
           ) : (
             <div className='md:flex gap-3 hidden justify-center items-center'>
-              <Link href={'/dashboard'}>
+              <Link href={'/dashboard/all'}>
                 <Button variant={'outline'} size={'sm'} className='flex items-center gap-2'>
                   <Send />
                   <span>Dashboard</span>
@@ -69,7 +69,9 @@ const Navbar = async () => {
                     <LoginLink>Sign in</LoginLink>
                   </Button>
                 ) : (
-                  <AddButton>Dashboard</AddButton>
+                  <Link href={'/dashboard/all'}>
+                    <AddButton>Dashboard</AddButton>
+                  </Link>
                 )
               }
 

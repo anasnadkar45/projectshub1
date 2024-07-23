@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ProjectCategoryLinks } from '@/app/components/project/ProjectCategoryLinks'
+import { unstable_noStore } from 'next/cache'
 
 async function getProjects(category:string) {
   const whereClause = category === "all" ? {} : { category: category as ProjectCategoryTypes };
@@ -37,6 +38,7 @@ export default async function Dashboard({
 }: {
   params: { category: string };
 }) {
+  unstable_noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const projectData = await getProjects(params.category);

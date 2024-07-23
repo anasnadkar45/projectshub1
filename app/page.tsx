@@ -35,7 +35,7 @@ export default async function Home() {
     <main className="min-h-screen w-full dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex justify-center">
       <Navbar />
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="max-w-[1380px] w-full mx-auto z-10 px-3 md:px-0 space-y-5">
+      <div className="max-w-[1380px] w-full mx-auto mb-10 z-10 px-3 md:px-0 space-y-5">
         <div className="mt-[150px] max-w-[800px] mx-auto space-y-7 text-center">
           <h1 className={cn(amaranth.className, "text-5xl md:text-7xl font-extrabold ")}>Showcase and Collaborate <span className="text-primary">on Innovative Projects.</span></h1>
           <p className="text-muted md:text-lg">Spotlight your latest innovations and collaborate with a vibrant community. Project Hub helps your side projects gain the attention and support they need to thrive.</p>
