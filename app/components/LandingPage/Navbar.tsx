@@ -62,7 +62,7 @@ const Navbar = async () => {
             <DialogTrigger>
               <EllipsisVertical />
             </DialogTrigger>
-            <DialogContent className='top-36 w-[370px] sm:w-[450px] rounded-lg'>
+            <DialogContent className='top-36 w-[370px] min-h-[120px] pt-10 sm:w-[450px] rounded-lg'>
               {
                 !user ? (
                   <Button size={"sm"} asChild>
