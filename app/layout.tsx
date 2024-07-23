@@ -34,7 +34,7 @@ export default function RootLayout({
         <NextTopLoader />
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
