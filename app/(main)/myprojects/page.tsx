@@ -38,7 +38,7 @@ export default async function MyProjects() {
     }
     if (projectData.length === 0) {
         return (
-            <div className='w-full bg-card text-center py-20 mt-5 space-y-2 border rounded-lg'>
+            <div className='w-full bg-card text-center py-20 mt-5 mb-10 space-y-2 border rounded-lg'>
                 <h1 className='text-3xl font-extrabold'>You have no Project created yet!</h1>
                 <p className='text-muted'>Start by adding some projects to your dashboard!</p>
                 <Link href={'/dashboard/all'}>

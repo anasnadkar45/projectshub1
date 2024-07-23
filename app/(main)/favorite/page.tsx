@@ -63,7 +63,7 @@ export default async function MyProjects() {
             <div className='w-full bg-card text-center py-20 mt-5 space-y-2 border rounded-lg'>
                 <h1 className='text-3xl font-extrabold'>You have no favorites yet!</h1>
                 <p className='text-muted'>Start by adding some favorites to your dashboard!</p>
-                <Link href={'/dashboard'}>
+                <Link href={'/dashboard/all'}>
                     <AddButton className='mt-4'>Add Favorite</AddButton>
                 </Link>
             </div>
@@ -72,7 +72,7 @@ export default async function MyProjects() {
 
     return (
         <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 mb-10">
                 {favoriteProjects.map((favorite) => (
                     <FavoriteProjectCard key={favorite.Project.id} project={favorite.Project as any} />
                 ))}

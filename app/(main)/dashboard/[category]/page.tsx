@@ -27,6 +27,9 @@ async function getProjects(category:string) {
       image: true,
       isFavorited: true,
       createdAt: true
+    },
+    orderBy:{
+      createdAt:"desc"
     }
   })
   return data;
@@ -44,7 +47,7 @@ export default async function Dashboard({
   const projectData = await getProjects(params.category);
 
   return (
-    <div className='space-y-4'>
+    <div className='space-y-4 mb-10'>
       <div className='flex justify-between items-center'>
         <h1 className='text-2xl font-bold'>Dashboard</h1>
         <div className='flex gap-4'>

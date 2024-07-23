@@ -20,6 +20,9 @@ async function getProjects() {
       image: true,
       isFavorited: true,
       createdAt: true
+    },
+    orderBy:{
+      createdAt:"desc"
     }
   })
   return data;
