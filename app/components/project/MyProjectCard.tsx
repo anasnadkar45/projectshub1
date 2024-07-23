@@ -94,7 +94,7 @@ const MyProjectCard = ({ project }: iProjectProps) => {
                                     <p className='mt-[3px]'>Website</p>
                                 </Badge>
                             </Link>
-                            <Link href={project.projectLink} target="_blank">
+                            <Link href={project.githubLink} target="_blank">
                                 <Badge className="flex items-center bg-white gap-2 px-2 py-1 text-[10px]">
                                     <AiFillGithub size={20} />
                                     <p className='mt-[3px]'>Source</p>
