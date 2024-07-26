@@ -53,7 +53,7 @@ export async function GET() {
   if (dbUser) {
     return NextResponse.redirect(
       process.env.NODE_ENV === "development"
-      ?"http://localhost:3000/dashboard"
+      ?"http://localhost:3000/"
       : "https://projectshub-two.vercel.app/"
     );
   } else {
